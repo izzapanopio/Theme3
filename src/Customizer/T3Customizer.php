@@ -21,6 +21,11 @@ final class T3Customizer
     ];
 
     public $wp_manager;
+    public $controls = [
+        'color' => '\WP_Customize_Color_Control',
+        'image' => '\WP_Customize_Image_Control',
+        'upload' => '\WP_Customize_Upload_Control'
+    ];
 
     private function __construct() {}
     private function __clone() {}
@@ -58,6 +63,7 @@ final class T3Customizer
         global $wp_customize;
         $this->wp_customize = $wp_customize;
         foreach(self::ENTITIES as $type) {
+            $args = Collection::getInstance($type)->data;
             if($type == self::CONTROL) {
                 $this->renderControl($type);
             } else if($type == self::SECTION) {
@@ -88,12 +94,21 @@ final class T3Customizer
         }
     }
 
+    private function getControlClass($type) {
+        if(!isset($this->controls[$type])) {
+            return '\WP_Customize_Control';
+        }
+        return $this->controls[$type];
+    }
+
     private function renderControl($type) {
         $controls = Collection::getInstance($type)->data;
         foreach($controls as $control) {
             $args = $control->toArray();
             $this->wp_customize->add_setting($args['settings'], $control->getSettings());
-            $this->wp_customize->add_control(new \WP_Customize_Color_Control(
+            $type = isset($args['type'])?$args['type']:'';
+            $Class = $this->getControlClass($type);
+            $this->wp_customize->add_control(new $Class(
                 $this->wp_customize,
                 $control->id,
                 $args
