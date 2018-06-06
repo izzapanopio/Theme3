@@ -1,11 +1,13 @@
 <?php
 namespace Theme3\Customizer;
 
-trait CustomizerTrait
+trait T3CustomizerTrait
 {
 
-    private function getId($label)
+    private function generateId($label)
     {
         return sanitize_title($label);
     }
+
 }
+
