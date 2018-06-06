@@ -6,14 +6,14 @@ use Theme3\Customizer\Panel;
 use Theme3\Customizer\Section;
 use Theme3\Customizer\CustomizerTrait;
 
-final class T3Customizer 
+final class T3Customizer
 {
     use CustomizerTrait;
     private static $instance;
-    
+
     public const PANEL = 'panel';
     public const SECTION = 'section';
-    public const CONTROL = 'control'; 
+    public const CONTROL = 'control';
     public const ENTITIES = [
         'panel',
         'section',
@@ -24,7 +24,8 @@ final class T3Customizer
     public $controls = [
         'color' => '\WP_Customize_Color_Control',
         'image' => '\WP_Customize_Image_Control',
-        'upload' => '\WP_Customize_Upload_Control'
+        'upload' => '\WP_Customize_Upload_Control',
+        'repeater' => 'Theme3\Control\RepeaterControl'
     ];
 
     private function __construct() {}
@@ -68,9 +69,9 @@ final class T3Customizer
             default:
                 throw new \InvalidArgumentException("$type is not a customizer entity");
         }
-    } 
+    }
 
-    public function getSection($title) 
+    public function getSection($title)
     {
         return Collection::getInstance(self::SECTION)->get($this->generateId($title));
     }
@@ -86,7 +87,7 @@ final class T3Customizer
                 $this->renderSection($type);
             } else {
                 $this->renderPanel($type);
-            }    
+            }
         }
     }
 
@@ -99,14 +100,22 @@ final class T3Customizer
     private function renderPanel($type) {
         $panels = Collection::getInstance($type)->data;
         foreach($panels as $panel) {
+<<<<<<< HEAD
             $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
+=======
+           $this->wp_customize->add_panel($panel->id, $panel->toArray());
+>>>>>>> c8f104c6af2507364373d01ca5fe79c89652a04b
         }
     }
 
     private function renderSection($type) {
         $sections = Collection::getInstance($type)->data;
         foreach($sections as $section) {
+<<<<<<< HEAD
             $this->wp_customize->add_section($section->id, $section->toArray()); 
+=======
+           $this->wp_customize->add_section($section->id, $section->toArray());
+>>>>>>> c8f104c6af2507364373d01ca5fe79c89652a04b
         }
     }
 
@@ -128,7 +137,7 @@ final class T3Customizer
                 $this->wp_customize,
                 $control->id,
                 $args
-            )); 
+            ));
         }
     }
 }
