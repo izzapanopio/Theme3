@@ -1,0 +1,25 @@
+{
+    "name": "jeevonang/ibx-wp-extension",
+    "type": "library",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "authors": [
+        {
+            "name": "John Jeevon Ang",
+            "email": "john.an@ibinex.tech"
+        },
+        {
+            "name": "Leo Ordonez III",
+            "email": "leo.or@ibinex.tech"
+        },
+        {
+            "name": "Ryan Molina",
+            "email": "ryan.mo@ibinex.tech"
+        },
+        {
+            "name": "Carizza Panopio",
+            "email": "ma.pa@ibinex.tech"
+        }
+    ]
+}
