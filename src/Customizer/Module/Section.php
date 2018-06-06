@@ -34,15 +34,5 @@ class Section implements CustomizerInterface
         Collection::getInstance('control')->add(new Control($args));        
         return $this;
     }
-
-    public function toArray() {
-        $arr = [
-            'id' => $this->id,
-            'title' => $this->title
-        ];
-        if(isset($this->priority)) { $arr['priority'] = $this->priority; }
-        if(isset($this->panel)) { $arr['panel'] = $this->panel; }
-        return $arr;
-    }
 }
 

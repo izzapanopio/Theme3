@@ -26,15 +26,8 @@ class Collection
 
     public function get($id) 
     {
+        if(!isset($this->data[$id]))
+            throw new \InvalidArgumentException("$id do not exist");
         return $this->data[$id];
     }
-    //public function addPanel(string $title, int $priority) {
-    //    $this->_panel[] = new Panel(func_get_args());
-    //} 
-
-    //public function addSection(string $title, int $priority) {
-    //    $this->_section[] = new Section(func_get_args());    
-    //}
-
-    
 }

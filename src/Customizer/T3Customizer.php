@@ -40,6 +40,22 @@ final class T3Customizer
         return self::$instance;
     }
     
+    public function removeDefaults() 
+    {
+        global $wp_customize;
+        $sections = [
+            'title_tagline',
+            'static_front_page',
+            'widgets'
+        ];
+
+        foreach($sections as $section) {
+            $wp_customize->remove_section($section);
+        }
+
+        return $this;
+    }
+
     public function create(string $type, string $title, int $priority = 0): T3Customizer
     {
         switch($type) {
@@ -83,14 +99,14 @@ final class T3Customizer
     private function renderPanel($type) {
         $panels = Collection::getInstance($type)->data;
         foreach($panels as $panel) {
-           $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
+            $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
         }
     }
 
     private function renderSection($type) {
         $sections = Collection::getInstance($type)->data;
         foreach($sections as $section) {
-           $this->wp_customize->add_section($section->id, $section->toArray()); 
+            $this->wp_customize->add_section($section->id, $section->toArray()); 
         }
     }
 

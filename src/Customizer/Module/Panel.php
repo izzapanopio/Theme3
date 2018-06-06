@@ -14,13 +14,4 @@ class Panel implements CustomizerInterface
         $this->title = $args[1];
         if(isset($args[2])) { $this->priority = $args[2]; }
     }
-
-     public function toArray() {
-        $arr = [
-            'id' => $this->id,
-            'title' => $this->title
-        ];
-        if(isset($this->priority)) { $arr['priority'] = $this->priority; }
-        return $arr;
-    }
 }
