@@ -4,7 +4,7 @@ namespace Theme3\Customizer;
 class Collection 
 {
     private static $instances = [];
-    private $data = [];
+    public $data = [];
 
     private function __construct() {}
     private function __clone() {}
@@ -21,9 +21,13 @@ class Collection
 
     public function add(CustomizerInterface $obj): void
     {
-        $this->data[] = $obj;
+        $this->data[$obj->id] = $obj;
     }
 
+    public function get($id) 
+    {
+        return $this->data[$id];
+    }
     //public function addPanel(string $title, int $priority) {
     //    $this->_panel[] = new Panel(func_get_args());
     //} 

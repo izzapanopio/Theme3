@@ -4,14 +4,23 @@ namespace Theme3;
 use Theme3\Customizer\Collection;
 use Theme3\Customizer\Panel;
 use Theme3\Customizer\Section;
+use Theme3\Customizer\CustomizerTrait;
 
 final class T3Customizer 
 {
+    use CustomizerTrait;
     private static $instance;
+    
+    public const PANEL = 'panel';
+    public const SECTION = 'section';
+    public const CONTROL = 'control'; 
+    public const ENTITIES = [
+        'panel',
+        'section',
+        'control'
+    ];
 
-    private const PANEL = 'panel';
-    private const SECTION = 'section';
-    private const CONTROL = 'control'; 
+    public $wp_manager;
 
     private function __construct() {}
     private function __clone() {}
@@ -40,9 +49,55 @@ final class T3Customizer
         }
     } 
 
+    public function getSection($title) 
+    {
+        return Collection::getInstance(self::SECTION)->get($this->generateId($title));
+    }
+
     public function render() {
+        global $wp_customize;
+        $this->wp_customize = $wp_customize;
+        foreach(self::ENTITIES as $type) {
+            if($type == self::CONTROL) {
+                $this->renderControl($type);
+            } else if($type == self::SECTION) {
+                $this->renderSection($type);
+            } else {
+                $this->renderPanel($type);
+            }    
+        }
+    }
+
+    private function debug( $args ) {
         echo "<pre>";
-        var_dump( Collection::getInstance('panel') );
+        var_dump( $args );
         echo "</pre>";
+    }
+
+    private function renderPanel($type) {
+        $panels = Collection::getInstance($type)->data;
+        foreach($panels as $panel) {
+           $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
+        }
+    }
+
+    private function renderSection($type) {
+        $sections = Collection::getInstance($type)->data;
+        foreach($sections as $section) {
+           $this->wp_customize->add_section($section->id, $section->toArray()); 
+        }
+    }
+
+    private function renderControl($type) {
+        $controls = Collection::getInstance($type)->data;
+        foreach($controls as $control) {
+            $args = $control->toArray();
+            $this->wp_customize->add_setting($args['settings'], $control->getSettings());
+            $this->wp_customize->add_control(new \WP_Customize_Color_Control(
+                $this->wp_customize,
+                $control->id,
+                $args
+            )); 
+        }
     }
 }

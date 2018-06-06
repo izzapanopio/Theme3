@@ -7,7 +7,6 @@ class Panel implements CustomizerInterface
 
     public $id;
     public $title;
-    public $priority;
 
     public function __construct($args) 
     {
@@ -16,4 +15,12 @@ class Panel implements CustomizerInterface
         if(isset($args[2])) { $this->priority = $args[2]; }
     }
 
+     public function toArray() {
+        $arr = [
+            'id' => $this->id,
+            'title' => $this->title
+        ];
+        if(isset($this->priority)) { $arr['priority'] = $this->priority; }
+        return $arr;
+    }
 }
