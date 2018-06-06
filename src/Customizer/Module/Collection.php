@@ -12,11 +12,16 @@ class Collection
 
     public static function getInstance(string $instanceName): self 
     {
-        if($instances[$instanceName] === null) {
-            self::$instaces[$instanceName] = new self;
+       if(!array_key_exists($instanceName, self::$instances)) { 
+            self::$instances[$instanceName] = new self();
         }
 
-        return $instances[$instanceName];
+        return self::$instances[$instanceName];
+    }
+
+    public function add(CustomizerInterface $obj): void
+    {
+        $this->data[] = $obj;
     }
 
     //public function addPanel(string $title, int $priority) {

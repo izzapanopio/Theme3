@@ -1,7 +1,7 @@
 <?php
 namespace Theme3\Customizer;
 
-trait T3CustomizerTrait
+trait CustomizerTrait
 {
 
     private function generateId($label)

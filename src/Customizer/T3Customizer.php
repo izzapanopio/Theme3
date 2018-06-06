@@ -2,11 +2,12 @@
 namespace Theme3;
 
 use Theme3\Customizer\Collection;
+use Theme3\Customizer\Panel;
+use Theme3\Customizer\Section;
 
 final class T3Customizer 
 {
     private static $instance;
-    private $_collection;
 
     private const PANEL = 'panel';
     private const SECTION = 'section';
@@ -25,17 +26,14 @@ final class T3Customizer
         return self::$instance;
     }
     
-    public function create(string $type, $title, int $priority = 0): T3Customizer
+    public function create(string $type, string $title, int $priority = 0): T3Customizer
     {
         switch($type) {
             case self::PANEL:
-                $this->_collection->addPanel($title, $priority); 
+                Collection::getInstance($type)->add(new Panel(func_get_args()));
                 return $this;
             case self::SECTION:
-                $this->_collection->addSection($title, $priority);
-                return $this;
-            case self::CONTROL:
-                $this->_collection->control($args);
+                Collection::getInstance($type)->add(new Section(func_get_args()));
                 return $this;
             default:
                 throw new \InvalidArgumentException("$type is not a customizer entity");
@@ -44,7 +42,7 @@ final class T3Customizer
 
     public function render() {
         echo "<pre>";
-        var_dump( $this->_collection );
+        var_dump( Collection::getInstance('panel') );
         echo "</pre>";
     }
 }
