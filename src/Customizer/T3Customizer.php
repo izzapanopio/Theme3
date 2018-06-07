@@ -20,7 +20,6 @@ final class T3Customizer
         'control'
     ];
 
-    public $wp_manager;
     public $controls = [
         'color' => '\WP_Customize_Color_Control',
         'image' => '\WP_Customize_Image_Control',
@@ -91,31 +90,17 @@ final class T3Customizer
         }
     }
 
-    private function debug( $args ) {
-        echo "<pre>";
-        var_dump( $args );
-        echo "</pre>";
-    }
-
     private function renderPanel($type) {
         $panels = Collection::getInstance($type)->data;
         foreach($panels as $panel) {
-<<<<<<< HEAD
             $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
-=======
-           $this->wp_customize->add_panel($panel->id, $panel->toArray());
->>>>>>> c8f104c6af2507364373d01ca5fe79c89652a04b
         }
     }
 
     private function renderSection($type) {
         $sections = Collection::getInstance($type)->data;
         foreach($sections as $section) {
-<<<<<<< HEAD
             $this->wp_customize->add_section($section->id, $section->toArray()); 
-=======
-           $this->wp_customize->add_section($section->id, $section->toArray());
->>>>>>> c8f104c6af2507364373d01ca5fe79c89652a04b
         }
     }
 
