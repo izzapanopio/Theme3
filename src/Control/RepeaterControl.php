@@ -15,7 +15,7 @@ class RepeaterControl extends \WP_Customize_Control
 
     public function enqueue()
     {
-        wp_enqueue_script('customizer/main', get_template_directory_uri() . '/assets/scripts/custom/repeater-control.js', array(), null, true);
+        wp_enqueue_script('customizer/main', App\config('T3.assets') . '/scripts/custom/repeater-control.js', array(), null, true);
     }
 
     public function render_content()
