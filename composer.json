@@ -1,5 +1,5 @@
 {
-    "name": "Theme3/customizer",
+    "name": "theme3/customizer",
     "type": "library",
     "require": {
         "php": ">=5.3.0"
