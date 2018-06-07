@@ -8,12 +8,12 @@
 
 <div class="repeater-wrapper">
     <div class="row">
-        <input type="hidden" id="repeater-control_collector" name="{{ esc_attr($form->id) }}" value="{{ esc_attr($form->value()) }}" {{ $form->link() }} />
+        <input type="hidden" class="repeater-control_collector" name="{{ esc_attr($form->id) }}" {{ $form->link() }} />
         <div class="d-none repeater-form">
           @include($form->view)
         </div>
         <div class="col" id="repeater-form-container">
-          @if(count($data))
+          @if(isset($data) && count($data))
             @foreach($data as $item)
               <div class='card card-repeater p-0 m-0 rounded-0'>
                 <div class='card-header pt-0 pb-1 pr-2 pl-2'>

@@ -2,15 +2,21 @@ jQuery(document).ready(() => {
   var context = this;
   var module = {
     $document  : $(document),
-    $container : $('#repeater-form-container'),
-    $collector : $('#repeater-control_collector'),
+    $container : function(el) {
+      return $(`#${this.getCurrentModule(el)} #repeater-form-container`);
+    },
+    $collector : function(el) {
+      return $(`#${this.getCurrentModule(el)} .repeater-control_collector`);
+    },
     $addBtn    : '.add-button',
     $rmvBtn    : '.remove-button',
     $form      : {
       values   : [],
-      selector : $('.repeater-form'),
-      generate : function() {
-        var form = this.selector.clone().removeClass('d-none');
+      selector : function(el) {
+        return $(`#${module.getCurrentModule(el)} .repeater-form`);
+      },
+      generate : function(el) {
+        var form = this.selector(el).clone().removeClass('d-none');
         return `<div class='card card-repeater p-0 m-0 rounded-0'>
                   <div class='card-header pt-0 pb-1 pr-2 pl-2'>
                     <button type="button" class="minimize bg-transparent p-0 border-0 show" onclick='module.onClickToggle(this)'>–</button>
@@ -24,8 +30,10 @@ jQuery(document).ready(() => {
                 </div>`;
       },
       onInputUpdated: function() {
+        var current = module.$collector(this).attr('name');
+
         var container = $(this).closest('.card-repeater');
-        var idx = $('.card-repeater').index(container);
+        var idx = $(`#${module.getCurrentModule(this)} .card-repeater`).index(container);
         var form = $(this).closest('.repeater-form');
         var data = {};
 
@@ -33,35 +41,32 @@ jQuery(document).ready(() => {
           data[field.name] = field.value;
         });
 
-        module.$form.values[idx] = data;
-        module.$form.notifyDataSetChanged();
+        module.$form.values[current][idx] = data;
+        module.$form.notifyDataSetChanged(current);
       },
-      notifyDataSetChanged: function() {
-        module.$collector.val(JSON.stringify(module.$form.values));
-        module.$collector.trigger('change');
-      },
-      prefill: function() {
-        module.$form.values.map((data, i) => {
-          module.$container.append(module.$form.generate());
-
-          var form = $('.card-repeater form.repeater-form').get(i);
-          $.each($(form).serializeArray(), function(_, field) {
-            console.log(`data: ${JSON.stringify(data)}, field: ${JSON.stringify(field)}`);
-          });
-        });
+      notifyDataSetChanged: function(current) {
+        $(`input[name='${current}']`).val(JSON.stringify(module.$form.values[current]));
+        $(`input[name='${current}']`).trigger('change');
       }
     },
-    onClickAdd : function(ev) {
-      module.$container.append(module.$form.generate());
-      module.$form.values.push({});
+    getCurrentModule: function(el) {
+      return $(el).closest('.customize-control-repeater').attr('id');
+    },
+    onClickAdd: function(ev) {
+      var current = module.$collector(this).attr('name');
+
+      module.$container(this).append(module.$form.generate(this));
+      module.$form.values[current].push({});
+      module.$form.notifyDataSetChanged(current);
     },
     onClickRemove: function() {
-      var container = $(this).closest('.card-repeater');
-      var idx = $('.card-repeater').index(container);
+      var container = $(this).closest(`.card-repeater`);
+      var idx = $(`#${module.getCurrentModule(this)} .card-repeater`).index(container);
+      var current = module.$collector(this).attr('name');
 
       container.remove();
-      module.$form.values.splice(idx, 1);
-      module.$form.notifyDataSetChanged();
+      module.$form.values[current].splice(idx, 1);
+      module.$form.notifyDataSetChanged(current);
     },
     onClickToggle: function(item) {
       var item = $(item);
@@ -78,7 +83,13 @@ jQuery(document).ready(() => {
     },
     init: function() {
       context.module = this;
-      if(module.$collector.val()) module.$form.values = JSON.parse(module.$collector.val());
+
+      $(`.repeater-control_collector`).map((x, y) => {
+        if(!$(y).val()) $(y).val('[]');
+        module.$form.values[$(y).attr('name')] = JSON.parse($(y).attr('value'));
+      });
+
+      console.log(module.$form.values);
     }
   }
 
