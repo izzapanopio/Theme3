@@ -17,8 +17,8 @@ class RadioImageControl extends \WP_Customize_Control
         
     public function enqueue() 
     {
-        wp_enqueue_style('radio_image_css', App\Config('T3.assets') . '/styles/radio-image.css' );
-        wp_enqueue_script('radio_image_js', App\Config('T3.assets') . '/scripts/custom/radio-image.js' );
+        wp_enqueue_style('radio_image_css', App\Config('T3.assets') . '/styles/control/radio-image.css' );
+        wp_enqueue_script('radio_image_js', App\Config('T3.assets') . '/scripts/control/radio-image.js' );
     }
     
     public function render_content() 
