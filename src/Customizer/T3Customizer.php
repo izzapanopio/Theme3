@@ -31,7 +31,7 @@ final class T3Customizer
     private function __construct()
     {
         $config = [
-            'T3.assets' => App\config('theme.uri') . '/vendor/Theme3/assets'
+            'T3.assets' => App\config('theme.uri') . '/vendor/theme3/customizer/assets'
         ];
 
         App\config($config);

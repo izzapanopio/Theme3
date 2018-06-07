@@ -78,7 +78,7 @@ jQuery(document).ready(() => {
     },
     init: function() {
       context.module = this;
-      module.$form.values = JSON.parse(module.$collector.val());
+      if(module.$collector.val()) module.$form.values = JSON.parse(module.$collector.val());
     }
   }
 
