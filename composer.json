@@ -1,5 +1,5 @@
 {
-    "name": "jeevonang/ibx-wp-extension",
+    "name": "theme3/customizer",
     "type": "library",
     "require": {
         "php": ">=5.3.0"
@@ -7,19 +7,27 @@
     "authors": [
         {
             "name": "John Jeevon Ang",
-            "email": "john.an@ibinex.tech"
+            "email": "johnjeevonang@gmail.com"
         },
         {
             "name": "Leo Ordonez III",
-            "email": "leo.or@ibinex.tech"
+            "email": "third.ordonez@gmail.com"
         },
         {
             "name": "Ryan Molina",
-            "email": "ryan.mo@ibinex.tech"
+            "email": "ryangabrielpmolina@gmail.com"
         },
         {
             "name": "Carizza Panopio",
-            "email": "ma.pa@ibinex.tech"
+            "email": "carizzapanopio@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Theme3\\": "src/Customizer",
+            "Theme3\\Customizer\\": "src/Customizer/Module",
+            "Theme3\\Control\\": "src/Control"
+        }
+    },
+    "minimum-stability": "dev"
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Theme3;
 
+use App;
 use Theme3\Customizer\Collection;
 use Theme3\Customizer\Panel;
 use Theme3\Customizer\Section;
@@ -28,9 +29,17 @@ final class T3Customizer
         'radio_image' => 'Theme3\Control\RadioImageControl'
     ];
 
-    private function __construct() {}
+    private function __construct()
+    {
+        $config = [
+            'T3.assets' => App\config('theme.uri') . '/vendor/theme3/customizer/assets'
+        ];
+
+        App\config($config);
+    }
+
     private function __clone() {}
-    private function __wakep() {}
+    private function __wakeup() {}
 
     public static function getInstance(): self
     {
@@ -40,8 +49,8 @@ final class T3Customizer
 
         return self::$instance;
     }
-    
-    public function removeDefaults() 
+
+    public function removeDefaults()
     {
         global $wp_customize;
         $sections = [
@@ -94,14 +103,14 @@ final class T3Customizer
     private function renderPanel($type) {
         $panels = Collection::getInstance($type)->data;
         foreach($panels as $panel) {
-            $this->wp_customize->add_panel($panel->id, $panel->toArray()); 
+            $this->wp_customize->add_panel($panel->id, $panel->toArray());
         }
     }
 
     private function renderSection($type) {
         $sections = Collection::getInstance($type)->data;
         foreach($sections as $section) {
-            $this->wp_customize->add_section($section->id, $section->toArray()); 
+            $this->wp_customize->add_section($section->id, $section->toArray());
         }
     }
 
