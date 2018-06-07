@@ -11,6 +11,7 @@ class RepeaterControl extends \WP_Customize_Control
         parent::__construct( $manager, $id, $args );
         $this->button_label = $args['button_label'];
         $this->view = $args['form'];
+        $this->title = $args['title'];
     }
 
     public function enqueue()

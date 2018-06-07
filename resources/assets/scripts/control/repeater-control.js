@@ -10,6 +10,7 @@ jQuery(document).ready(() => {
     },
     $addBtn    : '.add-button',
     $rmvBtn    : '.remove-button',
+    $doneBtn    : '.done-button',
     $form      : {
       values   : [],
       selector : function(el) {
@@ -17,23 +18,13 @@ jQuery(document).ready(() => {
       },
       generate : function(el) {
         var form = this.selector(el).clone().removeClass('d-none');
-        return `<div class='card card-repeater p-0 m-0 rounded-0'>
-                  <div class='card-header pt-0 pb-1 pr-2 pl-2'>
-                    <button type="button" class="minimize bg-transparent p-0 border-0 show" onclick='module.onClickToggle(this)'>–</button>
-                    <button type="button" class="close remove-button" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class='card-body collapse p-0 show'>
-                    <div class="p-3">${ form.html() }</div>
-                  </div>
-                </div>`;
+        return form.html();
       },
       onInputUpdated: function() {
         var current = module.$collector(this).attr('name');
 
         var container = $(this).closest('.card-repeater');
-        var idx = $(`#${module.getCurrentModule(this)} .card-repeater`).index(container);
+        var idx = $(`#${module.getCurrentModule(this)} #repeater-form-container .card-repeater`).index(container);
         var form = $(this).closest('.repeater-form');
         var data = {};
 
@@ -61,11 +52,13 @@ jQuery(document).ready(() => {
     },
     onClickRemove: function() {
       var container = $(this).closest(`.card-repeater`);
-      var idx = $(`#${module.getCurrentModule(this)} .card-repeater`).index(container);
+      var idx = $(`#${module.getCurrentModule(this)} #repeater-form-container .card-repeater`).index(container);
       var current = module.$collector(this).attr('name');
 
       container.remove();
       module.$form.values[current].splice(idx, 1);
+      console.log('idx', idx);
+      console.log('values', module.$form.values);
       module.$form.notifyDataSetChanged(current);
     },
     onClickToggle: function(item) {
@@ -75,11 +68,15 @@ jQuery(document).ready(() => {
 
       if(item.hasClass('show')) {
         item.removeClass('show');
-        item.html('+');
+        // item.html('+');
       } else {
         item.addClass('show');
-        item.html('–');
+        // item.html('–');
       }
+    },
+    onComplete: function() {
+      var body = $(this).closest('.collapse');
+      body.collapse('toggle');
     },
     init: function() {
       context.module = this;
@@ -95,6 +92,7 @@ jQuery(document).ready(() => {
 
   module.$document.on('click', module.$addBtn, module.onClickAdd);
   module.$document.on('click', module.$rmvBtn, module.onClickRemove);
-  module.$document.on('change', '.form-control', module.$form.onInputUpdated )
+  module.$document.on('click', module.$doneBtn, module.onComplete);
+  module.$document.on('change', '.form-control', module.$form.onInputUpdated );
   return module.init();
 });
