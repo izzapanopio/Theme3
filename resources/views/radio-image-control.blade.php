@@ -10,7 +10,7 @@
     @foreach($form->choices as $item)
         <label for="_customize-input-{{ esc_attr($form->id . '-radio-' . $item->value) }}" {{ $item->value === get_theme_mod($form->id . '_settings')?"class='active'":'' }}>
             <input type="radio" id="_customize-input-{{ esc_attr($form->id . '-radio-' . $item->value) }}" name="{{ esc_attr($form->id) }}" value="{{ $item->value }}" data-customize-setting-link="{{ esc_attr($form->id . '_settings') }}">
-            <img src="{{ esc_attr($item->img) }}" alt="{{ $item->label || '' }}">
+            <img src="{{ esc_attr($item->img) }}" alt="{{ $form->label || '' }}">
         </label>
     @endforeach
 </span>
