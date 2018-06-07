@@ -21,7 +21,7 @@ class Collection
 
     public function add(CustomizerInterface $obj): void
     {
-        if(isset($this->data[$obj->id])){ throw new \InvalidArgumentException("$obj->title already exist"); }
+        if(isset($this->data[$obj->id])){ throw new \InvalidArgumentException("$obj->id already exist"); }
         $this->data[$obj->id] = $obj;
     }
 
