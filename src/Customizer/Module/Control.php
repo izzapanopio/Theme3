@@ -36,6 +36,7 @@ class Control implements CustomizerInterface
     }
 
     public function toArray() {
-        return $this->data; }
+        return $this->data; 
+    }
 }
 

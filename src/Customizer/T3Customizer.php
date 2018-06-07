@@ -25,7 +25,8 @@ final class T3Customizer
         'color' => '\WP_Customize_Color_Control',
         'image' => '\WP_Customize_Image_Control',
         'upload' => '\WP_Customize_Upload_Control',
-        'repeater' => 'Theme3\Control\RepeaterControl'
+        'repeater' => 'Theme3\Control\RepeaterControl',
+        'radio_image' => 'Theme3\Control\RadioImageControl'
     ];
 
     private function __construct()
