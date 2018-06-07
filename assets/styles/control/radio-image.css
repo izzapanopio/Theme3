@@ -1,0 +1,38 @@
+.customize-control-radio_image .customize-control-title {
+  margin-bottom: 0;
+  line-height: 22px;
+}
+
+.customize-control-radio_image .customize-control-description {
+  margin-bottom: 5px;
+}
+
+.customize-control-radio_image  .customize-inside-control-row {
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.customize-control-radio_image .customize-inside-control-row label {
+    padding: 6px; 
+    margin-top: 6px;
+    margin-bottom: 6px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+    position: relative;
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+.customize-control-radio_image .customize-inside-control-row .active {
+    border: 3px solid #5b9dd9;
+    box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
+}
+
+.customize-control-radio_image .customize-inside-control-row input {
+    visibility: hidden;
+    position: absolute;
+}
