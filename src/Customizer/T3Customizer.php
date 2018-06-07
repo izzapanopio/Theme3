@@ -114,7 +114,7 @@ final class T3Customizer
     }
 
     private function getControlClass($type) {
-        if(!isset($this->controls[$type])) {
+        if(!isset($this->controls[$type]) || !in_array($type, $this->controls)) {
             return '\WP_Customize_Control';
         }
         return $this->controls[$type];
