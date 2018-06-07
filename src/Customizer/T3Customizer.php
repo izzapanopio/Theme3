@@ -125,4 +125,8 @@ final class T3Customizer
             ));
         }
     }
+
+    public function organize(string $title, callable $func) {
+        $func($this->getSection($title));
+    }
 }
