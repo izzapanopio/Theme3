@@ -1,6 +1,6 @@
 <div class="repeater-wrapper">
     <div class="row mb-3">
-        @if(isset($form->options->type) && $form->options->type != 'fixed')
+        @if($form->options->type == 'dynamic')
         <div class="col">
             <button type="button" class="button add-new-widget float-right add-button">
                 <span>{{ $form->options->button_label }}</span>
@@ -23,7 +23,7 @@
                         <a href="#" class="card-link done-button text-success">
                             <i class="fa fa-check"></i>
                         </a>
-                        @if(isset($form->options->type) && $form->options->type != 'fixed')
+                        @if($form->options->type == 'dynamic')
                         <a href="#" class="card-link remove-button text-danger">
                             <i class="fa fa-trash"></i>
                         </a>
@@ -47,7 +47,7 @@
                                 <a href="#" class="card-link done-button text-success">
                                     <i class="fa fa-check"></i>
                                 </a>
-                                @if(isset($form->options->type) && $form->options->type != 'fixed')
+                                @if($form->options->type == 'dynamic')
                                 <a href="#" class="card-link remove-button text-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>

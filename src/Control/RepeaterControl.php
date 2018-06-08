@@ -10,6 +10,9 @@ class RepeaterControl extends \WP_Customize_Control
     {
         parent::__construct( $manager, $id, $args );
         $this->options = json_decode(json_encode($args['options']));
+        if(!isset($this->options->type)) {
+            $this->options->type = 'dynamic';
+        }
     }
 
     public function enqueue()
@@ -22,7 +25,7 @@ class RepeaterControl extends \WP_Customize_Control
     {
         $value = json_decode($this->value());
 
-        if(isset($this->options->type) && $this->options->type == 'fixed' && count($value) != $this->options->count) {
+        if($this->options->type == 'fixed' && count($value) != $this->options->count) {
             $value = array_fill(0, 4, []);
         }
 
