@@ -65,14 +65,6 @@ jQuery(document).ready(() => {
       var item = $(item);
       var body = item.parent().siblings();
       body.collapse('toggle');
-
-      if(item.hasClass('show')) {
-        item.removeClass('show');
-        // item.html('+');
-      } else {
-        item.addClass('show');
-        // item.html('–');
-      }
     },
     onComplete: function() {
       var body = $(this).closest('.collapse');

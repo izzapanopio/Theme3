@@ -26,7 +26,7 @@ final class T3Customizer
         'image' => '\WP_Customize_Image_Control',
         'upload' => '\WP_Customize_Upload_Control',
         'repeater' => 'Theme3\Control\RepeaterControl',
-        'radio_image' => 'Theme3\Control\RadioImageControl'
+        'radio_image' => 'Theme3\Control\RadioImageControl',
     ];
 
     private function __construct()

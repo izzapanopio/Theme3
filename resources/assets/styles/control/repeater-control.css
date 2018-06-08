@@ -1,0 +1,21 @@
+button.minimize,
+button.close {
+  cursor: pointer;
+  outline: 0 !important;
+}
+
+.repeater-wrapper .repeater-form-title {
+  padding: 13px 15px;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 !important;
+}
+
+.repeater-wrapper .card-header {
+  cursor: pointer !important;
+}
+
+.repeater-wrapper a.card-link {
+  box-shadow: none !important;
+  outline: none !important;
+}
