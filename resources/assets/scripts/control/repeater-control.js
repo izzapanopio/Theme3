@@ -10,7 +10,7 @@ jQuery(document).ready(() => {
     },
     $addBtn    : '.add-button',
     $rmvBtn    : '.remove-button',
-    $doneBtn    : '.done-button',
+    $doneBtn   : '.done-button',
     $form      : {
       values   : [],
       selector : function(el) {
@@ -22,7 +22,6 @@ jQuery(document).ready(() => {
       },
       onInputUpdated: function() {
         var current = module.$collector(this).attr('name');
-
         var container = $(this).closest('.card-repeater');
         var idx = $(`#${module.getCurrentModule(this)} #repeater-form-container .card-repeater`).index(container);
         var form = $(this).closest('.repeater-form');
@@ -57,8 +56,6 @@ jQuery(document).ready(() => {
 
       container.remove();
       module.$form.values[current].splice(idx, 1);
-      console.log('idx', idx);
-      console.log('values', module.$form.values);
       module.$form.notifyDataSetChanged(current);
     },
     onClickToggle: function(item) {
@@ -77,8 +74,6 @@ jQuery(document).ready(() => {
         if(!$(y).val()) $(y).val('[]');
         module.$form.values[$(y).attr('name')] = JSON.parse($(y).attr('value'));
       });
-
-      console.log(module.$form.values);
     }
   }
 
