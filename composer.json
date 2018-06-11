@@ -6,20 +6,7 @@
     },
     "authors": [
         {
-            "name": "John Jeevon Ang",
-            "email": "johnjeevonang@gmail.com"
-        },
-        {
-            "name": "Leo Ordonez III",
-            "email": "third.ordonez@gmail.com"
-        },
-        {
-            "name": "Ryan Molina",
-            "email": "ryangabrielpmolina@gmail.com"
-        },
-        {
-            "name": "Carizza Panopio",
-            "email": "carizzapanopio@gmail.com"
+            "name": "IBINEX PH"
         }
     ],
     "autoload": {
